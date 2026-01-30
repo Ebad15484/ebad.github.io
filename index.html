@@ -1,10 +1,127 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <link rel="stylesheet" href="style.css">
-    <title></title>
-  </head>
-  <body>
-      <script src="script.js"></script>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elysium Fast Food</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo">
+    <img src="logo.png" alt="Elysium Logo">
+  </div>
+  <nav>
+    <a href="#">HOME</a>
+    <a href="#">ALL PRODUCTS</a>
+    <a href="#">ABOUT</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1>Elysium Fast Food Company delivers bold flavors with fast, reliable service.</h1>
+    <p>
+      We serve freshly prepared meals and quick bites made with quality ingredients.
+      Our focus is on convenience, taste, and customer satisfaction.
+      Every visit to Elysium is designed to be simple, delicious, and memorable.
+    </p>
+    <button class="cta">GET STARTED</button>
+  </div>
+
+  <div class="hero-images">
+    <img src="burger1.png" alt="">
+    <img src="burger2.png" alt="">
+  </div>
+</section>
+
+<section class="products">
+  <aside class="sidebar">
+    <ul>
+      <li>DRINKS</li>
+      <li>PIZZAS</li>
+      <li class="active">BURGERS</li>
+      <li>SALADS</li>
+      <li>DESSERTS</li>
+    </ul>
+  </aside>
+
+  <main class="product-grid">
+    <h2 class="section-title">BURGERS</h2>
+
+    <div class="grid">
+      <div class="card">
+        <img src="mutton.png" alt="">
+        <h3>$40</h3>
+        <p>Mutton/Lamb Burger</p>
+        <button onclick="addToCart()">Add</button>
+      </div>
+
+      <div class="card">
+        <img src="beef.png" alt="">
+        <h3>$40</h3>
+        <p>Beef Burger</p>
+        <button onclick="addToCart()">Add</button>
+      </div>
+
+      <div class="card">
+        <img src="chicken.png" alt="">
+        <h3>$40</h3>
+        <p>Chicken Burger</p>
+        <button onclick="addToCart()">Add</button>
+      </div>
+
+      <div class="card">
+        <img src="cheese.png" alt="">
+        <h3>$40</h3>
+        <p>Cheese Burger</p>
+        <button onclick="addToCart()">Add</button>
+      </div>
+
+      <div class="card">
+        <img src="fish.png" alt="">
+        <h3>$40</h3>
+        <p>Fish Burger</p>
+        <button onclick="addToCart()">Add</button>
+      </div>
+
+      <div class="card">
+        <img src="sliders.png" alt="">
+        <h3>$40</h3>
+        <p>Sliders Burger</p>
+        <button onclick="addToCart()">Add</button>
+      </div>
+    </div>
+  </main>
+</section>
+
+<footer>
+  <div class="footer-col">
+    <img src="logo.png" alt="">
+  </div>
+
+  <div class="footer-col">
+    <h4>INFORMATION</h4>
+    <p>Home</p>
+    <p>Team</p>
+    <p>Locations</p>
+  </div>
+
+  <div class="footer-col">
+    <h4>TIME OF OPENING/CLOSING</h4>
+    <p>Monday: 12:00 - 22:00</p>
+    <p>Tuesday - Thursday: 12:00 - 10:00</p>
+    <p>Friday - Sunday: 12:00 - 10:00</p>
+  </div>
+
+  <div class="footer-col">
+    <h4>ADDRESS AND NUMBER</h4>
+    <p>📞 123456789</p>
+    <p>✉️ 123456789</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
 </html>
