@@ -1,126 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elysium Fast Food</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FastEats - Modern Fast Food</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="navbar">
-  <div class="logo">
-    <img src="logo.png" alt="Elysium Logo">
-  </div>
-  <nav>
-    <a href="#">HOME</a>
-    <a href="#">ALL PRODUCTS</a>
-    <a href="#">ABOUT</a>
-  </nav>
+<header>
+<div class="logo">🍔 FastEats</div>
+<nav>
+<a href="#home">Home</a>
+<a href="#menu">Menu</a>
+<a href="#contact">Contact</a>
+</nav>
+<button id="openCartBtn" class="cart-btn">Cart 🛒 (<span id="cart-count">0</span>)</button>
 </header>
 
-<section class="hero">
-  <div class="hero-text">
-    <h1>Elysium Fast Food Company delivers bold flavors with fast, reliable service.</h1>
-    <p>
-      We serve freshly prepared meals and quick bites made with quality ingredients.
-      Our focus is on convenience, taste, and customer satisfaction.
-      Every visit to Elysium is designed to be simple, delicious, and memorable.
-    </p>
-    <button class="cta">GET STARTED</button>
-  </div>
-
-  <div class="hero-images">
-    <img src="burger1.png" alt="">
-    <img src="burger2.png" alt="">
-  </div>
+<section id="home" class="hero">
+<div class="hero-overlay">
+<h1>FastEats</h1>
+<h2>Delicious fast food delivered to your door</h2>
+<p>Burgers • Fries • Pizza • Desserts • Drinks</p>
+<button id="specialBtn">Today's Special</button>
+</div>
 </section>
 
-<section class="products">
-  <aside class="sidebar">
-    <ul>
-      <li>DRINKS</li>
-      <li>PIZZAS</li>
-      <li class="active">BURGERS</li>
-      <li>SALADS</li>
-      <li>DESSERTS</li>
-    </ul>
-  </aside>
+<section id="menu">
+<h2>Our Menu</h2>
+<div class="categories-scroll" id="category-list">
+<!-- Categories generated here -->
+</div>
+<div class="menu-items" id="menu-items">
+<!-- Menu items generated here -->
+</div>
+</section>
 
-  <main class="product-grid">
-    <h2 class="section-title">BURGERS</h2>
-
-    <div class="grid">
-      <div class="card">
-        <img src="mutton.png" alt="">
-        <h3>$40</h3>
-        <p>Mutton/Lamb Burger</p>
-        <button onclick="addToCart()">Add</button>
-      </div>
-
-      <div class="card">
-        <img src="beef.png" alt="">
-        <h3>$40</h3>
-        <p>Beef Burger</p>
-        <button onclick="addToCart()">Add</button>
-      </div>
-
-      <div class="card">
-        <img src="chicken.png" alt="">
-        <h3>$40</h3>
-        <p>Chicken Burger</p>
-        <button onclick="addToCart()">Add</button>
-      </div>
-
-      <div class="card">
-        <img src="cheese.png" alt="">
-        <h3>$40</h3>
-        <p>Cheese Burger</p>
-        <button onclick="addToCart()">Add</button>
-      </div>
-
-      <div class="card">
-        <img src="fish.png" alt="">
-        <h3>$40</h3>
-        <p>Fish Burger</p>
-        <button onclick="addToCart()">Add</button>
-      </div>
-
-      <div class="card">
-        <img src="sliders.png" alt="">
-        <h3>$40</h3>
-        <p>Sliders Burger</p>
-        <button onclick="addToCart()">Add</button>
-      </div>
-    </div>
-  </main>
+<section id="contact">
+<h2>Contact Us</h2>
+<p>Email: info@fasteats.com</p>
+<p>Phone: +123 456 7890</p>
+<p>Address: 123 Fast Food Street, Food City</p>
 </section>
 
 <footer>
-  <div class="footer-col">
-    <img src="logo.png" alt="">
-  </div>
-
-  <div class="footer-col">
-    <h4>INFORMATION</h4>
-    <p>Home</p>
-    <p>Team</p>
-    <p>Locations</p>
-  </div>
-
-  <div class="footer-col">
-    <h4>TIME OF OPENING/CLOSING</h4>
-    <p>Monday: 12:00 - 22:00</p>
-    <p>Tuesday - Thursday: 12:00 - 10:00</p>
-    <p>Friday - Sunday: 12:00 - 10:00</p>
-  </div>
-
-  <div class="footer-col">
-    <h4>ADDRESS AND NUMBER</h4>
-    <p>📞 123456789</p>
-    <p>✉️ 123456789</p>
-  </div>
+<p>© 2026 FastEats. All rights reserved.</p>
 </footer>
+
+<!-- Floating cart sidebar -->
+<div id="cart-sidebar" class="cart-sidebar">
+<h2>Your Cart</h2>
+<div class="cart-items"></div>
+<p class="total">Total: $0.00</p>
+<button id="checkoutBtn">Checkout</button>
+<button id="closeCartBtn" class="close-btn">Close</button>
+</div>
 
 <script src="script.js"></script>
 </body>
