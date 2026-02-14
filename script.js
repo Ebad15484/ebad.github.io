@@ -90,3 +90,12 @@ document.getElementById('checkoutBtn').addEventListener('click',()=>{
     if(cart.length>0){alert(`Thank you! Total: $${cart.reduce((a,b)=>a+b.price*b.quantity,0).toFixed(2)}`); cart=[];updateCart();}
     else alert("Cart is empty!");
 });
+
+let rotation = document.querySelector('.hero')
+document.addEventListener('mousemove', function(e) {
+    let dx = e.pageX - window.innerWidth / 2
+    let dy = e.pageY - window.innerHeight / 2
+    let angleX = 20 * dx / window.innerWidth / 2
+    let angleY = 20 * dy / window.innerHeight / 2
+    block.style.transform = `rotateX(${-angleY}deg) rotateY(${angleX}deg)`
+})
