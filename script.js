@@ -1,92 +1,129 @@
-const specialBtn = document.getElementById('specialBtn');
-specialBtn.addEventListener('click',()=>{alert("Today's Special: 🍔 Double Cheeseburger Combo - $7.99!")});
-
-
-const menuItemsData = [
-{name:"Cheeseburger", price:5.99, category:"Burgers", img:"https://via.placeholder.com/150?text=Burger"},
-{name:"Veggie Burger", price:6.49, category:"Burgers", img:"https://via.placeholder.com/150?text=Veggie"},
-{name:"French Fries", price:2.99, category:"Sides", img:"https://via.placeholder.com/150?text=Fries"},
-{name:"Chicken Nuggets", price:4.99, category:"Sides", img:"https://via.placeholder.com/150?text=Nuggets"},
-{name:"Pepperoni Pizza", price:8.99, category:"Pizza", img:"https://via.placeholder.com/150?text=Pizza"},
-{name:"Margherita Pizza", price:7.99, category:"Pizza", img:"https://via.placeholder.com/150?text=Margherita"},
-{name:"Soft Drink", price:1.99, category:"Drinks", img:"https://via.placeholder.com/150?text=Drink"},
-{name:"Milkshake", price:3.49, category:"Drinks", img:"https://via.placeholder.com/150?text=Milkshake"},
-{name:"Ice Cream", price:2.49, category:"Desserts", img:"https://via.placeholder.com/150?text=IceCream"},
-{name:"Chocolate Cake", price:3.99, category:"Desserts", img:"https://via.placeholder.com/150?text=Cake"}
+const menuData = [
+  { id: 1, name: "Classic Burger", price: 5.99, category: "burgers", img: "https://images.unsplash.com/photo-1550547660-d9450f859349" },
+  { id: 2, name: "Cheese Burger", price: 6.49, category: "burgers", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd" },
+  { id: 3, name: "Loaded Fries", price: 3.99, category: "sides", img: "https://images.unsplash.com/photo-1606755962773-0c4f8c1c7a79" },
+  { id: 4, name: "Chicken Nuggets", price: 4.49, category: "sides", img: "https://images.unsplash.com/photo-1604908554164-ec0d15b6fbd5" },
+  { id: 5, name: "Cola", price: 1.99, category: "drinks", img: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97" },
+  { id: 6, name: "Milkshake", price: 2.99, category: "drinks", img: "https://images.unsplash.com/photo-1577805947697-89e18249d767" }
 ];
 
+let cart = [];
 
-const categories = [...new Set(menuItemsData.map(i=>i.category))];
-const categoryList = document.getElementById('category-list');
-categories.forEach(cat=>{
-    const a=document.createElement('a');
-    a.href="#"+cat;
-    a.textContent=cat;
-    categoryList.appendChild(a);
-});
+const menuContainer = document.getElementById("menu-items");
+const cartItems = document.getElementById("cart-items");
 
-
-const menuContainer = document.getElementById('menu-items');
-categories.forEach(cat=>{
-    const section = document.createElement('div');
-    section.id = cat;
-    section.innerHTML=`<h3 style="color:#e74c3c">${cat}</h3>`;
-    menuItemsData.filter(i=>i.category===cat).forEach(item=>{
-        const div=document.createElement('div');
-        div.classList.add('item');
-        div.dataset.name=item.name;
-        div.dataset.price=item.price;
-        div.innerHTML=`<img src="${item.img}" alt="${item.name}">
-        <h3>${item.name}</h3>
-        <p>$${item.price.toFixed(2)}</p>
-        <button class="add-btn">Add to Cart</button>`;
-        section.appendChild(div);
-    });
-    menuContainer.appendChild(section);
-});
-
-
-let cart=[];
-const cartSidebar = document.getElementById('cart-sidebar');
-const cartCount = document.getElementById('cart-count');
-
-function updateCart(){
-    const container = cartSidebar.querySelector('.cart-items');
-    container.innerHTML='';
-    let total=0;
-    cart.forEach((item,index)=>{
-        total+=item.price*item.quantity;
-        const div=document.createElement('div');
-        div.classList.add('cart-item');
-        div.innerHTML=`<span>${item.name} x ${item.quantity} - $${(item.price*item.quantity).toFixed(2)}</span>
-        <button data-index="${index}">Remove</button>`;
-        container.appendChild(div);
-    });
-    cartSidebar.querySelector('.total').textContent=`Total: $${total.toFixed(2)}`;
-    cartCount.textContent=cart.reduce((a,b)=>a+b.quantity,0);
-    container.querySelectorAll('button').forEach(btn=>{
-        btn.addEventListener('click',()=>{cart.splice(btn.dataset.index,1);updateCart();});
-    });
+function renderMenu(items) {
+  menuContainer.innerHTML = "";
+  items.forEach(item => {
+    menuContainer.innerHTML += `
+      <div class="card">
+        <img src="${item.img}">
+        <div class="card-content">
+          <h3>${item.name}</h3>
+          <p>$${item.price.toFixed(2)}</p>
+          <button onclick="addToCart(${item.id})">Add to Cart</button>
+        </div>
+      </div>
+    `;
+  });
 }
 
-document.addEventListener('click', e=>{
-    if(e.target.classList.contains('add-btn')){
-        const itemDiv = e.target.parentElement;
-        const name = itemDiv.dataset.name;
-        const price = parseFloat(itemDiv.dataset.price);
-        const existing = cart.find(i=>i.name===name);
-        if(existing) existing.quantity+=1;
-        else cart.push({name,price,quantity:1});
-        updateCart();
-        cartSidebar.classList.add('active');
-    }
+function filterCategory(category, btn) {
+  // Remove active class from all buttons
+  document.querySelectorAll(".categories button").forEach(b => b.classList.remove("active"));
+  
+  // Add active class to clicked button
+  btn.classList.add("active");
+
+  // Render menu items based on category
+  if (category === "all") {
+    renderMenu(menuData);
+  } else {
+    renderMenu(menuData.filter(item => item.category === category));
+  }
+}
+
+
+
+function animateCartCount() {
+  const countEl = document.getElementById("cart-count");
+  countEl.classList.add("bounce");
+  setTimeout(() => countEl.classList.remove("bounce"), 300);
+}
+
+function addToCart(id) {
+  const item = menuData.find(i => i.id === id);
+  cart.push(item);
+  updateCart();
+  animateCartCount();
+}
+
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  updateCart();
+  animateCartCount();
+}
+
+
+
+function updateCart() {
+  cartItems.innerHTML = "";
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    total += item.price;
+    cartItems.innerHTML += `
+      <div class="cart-item">
+        <span>${item.name}</span>
+        <span>$${item.price.toFixed(2)}</span>
+        <button onclick="removeFromCart(${index})" class="remove-btn">Remove</button>
+      </div>
+    `;
+  });
+
+  document.getElementById("total").textContent = total.toFixed(2);
+  document.getElementById("cart-count").textContent = cart.length;
+}
+
+
+function scrollToMenu() {
+  document.getElementById("menu").scrollIntoView({ behavior: "smooth" });
+}
+
+renderMenu(menuData);
+
+document.querySelector(".categories button.active").click();
+
+function removeFromCart(index) {
+  cart.splice(index, 1); // remove item at index
+  updateCart();          // refresh cart display
+}
+
+document.querySelector(".checkout").addEventListener("click", () => {
+  if(cart.length === 0){
+    alert("Your cart is empty!");
+    return;
+  }
+
+  let itemsList = cart.map(item => `${item.name} - $${item.price.toFixed(2)}`).join("\n");
+  let total = cart.reduce((sum, item) => sum + item.price, 0);
+
+  let confirmCheckout = confirm(
+    `Confirm your order:\n\n${itemsList}\n\nTotal: $${total.toFixed(2)}`
+  );
+
+  if(confirmCheckout){
+    alert("Thank you for your order! 🍔 Your food is on the way!");
+    cart = []; // clear cart
+    updateCart(); // refresh
+  }
 });
 
-
-document.getElementById('openCartBtn').addEventListener('click',()=>cartSidebar.classList.add('active'));
-document.getElementById('closeCartBtn').addEventListener('click',()=>cartSidebar.classList.remove('active'));
-
-document.getElementById('checkoutBtn').addEventListener('click',()=>{
-    if(cart.length>0){alert(`Thank you! Total: $${cart.reduce((a,b)=>a+b.price*b.quantity,0).toFixed(2)}`); cart=[];updateCart();}
-    else alert("Cart is empty!");
-});
+let rotation = document.querySelector('.hero')
+document.addEventListener('mousemove', function(e) {
+    let dx = e.pageX - window.innerWidth / 2
+    let dy = e.pageY - window.innerHeight / 2
+    let angleX = 20 * dx / window.innerWidth / 2
+    let angleY = 20 * dy / window.innerHeight / 2
+    block.style.transform = `rotateX(${-angleY}deg) rotateY(${angleX}deg)`
+})
