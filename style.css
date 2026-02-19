@@ -269,3 +269,40 @@ footer {
     background-color:#e74c3c;
     color:white;
 }
+
+/* HERO 3D SETUP */
+.hero {
+  height: 90vh;
+  background: linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+              url("https://images.unsplash.com/photo-1550547660-d9450f859349");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* THIS enables 3D perspective */
+  perspective: 1000px;
+}
+
+.block {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(15px);
+  padding: 50px;
+  border-radius: 25px;
+  text-align: center;
+  color: white;
+
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out;
+
+  box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+}
+
+.hero-text p {
+  margin: 20px 0;
+}
