@@ -119,7 +119,9 @@ document.querySelector(".checkout").addEventListener("click", () => {
   }
 });
 
+// 3d effect
 let rotation = document.querySelector('.logo')
+
 document.addEventListener('mousemove', function(e) {
     let dx = e.pageX - window.innerWidth / 2
     let dy = e.pageY - window.innerHeight / 2
