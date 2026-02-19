@@ -119,7 +119,7 @@ document.querySelector(".checkout").addEventListener("click", () => {
   }
 });
 
-let block = document.querySelector('.block')
+let block = document.querySelector('.hero')
 
 document.addEventListener('mousemove', function(e) {
     let dx = e.pageX - window.innerWidth / 2
