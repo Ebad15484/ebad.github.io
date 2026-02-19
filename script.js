@@ -119,13 +119,22 @@ document.querySelector(".checkout").addEventListener("click", () => {
   }
 });
 
-// 3d effect
-let rotation = document.querySelector('.logo')
+let block = document.querySelector('.block')
 
 document.addEventListener('mousemove', function(e) {
     let dx = e.pageX - window.innerWidth / 2
     let dy = e.pageY - window.innerHeight / 2
-    let angleX = 20 * dx / window.innerWidth / 2
-    let angleY = 20 * dy / window.innerHeight / 2
-    logo.style.transform = `rotateX(${-angleY}deg) rotateY(${angleX}deg)`
+
+    let angleX = 20 * dx / window.innerWidth
+    let angleY = 20 * dy / window.innerHeight
+
+    block.style.transform = `
+        rotateX(${-angleY}deg)
+        rotateY(${angleX}deg)
+    `
+})
+
+/* Reset when mouse leaves */
+document.addEventListener('mouseleave', function() {
+    block.style.transform = "rotateX(0deg) rotateY(0deg)"
 })
